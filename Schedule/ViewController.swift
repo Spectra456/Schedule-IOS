@@ -7,19 +7,33 @@
 //
 
 import UIKit
+import SwiftyJSON
+
+
 
 class ViewController: UIViewController {
 
+    
+    @IBAction func Push(_ sender: UIButton) {
+        
+        showText()
+        
+    }
+    @IBOutlet weak var display: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func showText(){
+        let sch: Schedule = Schedule(url: "http://ruz2.spbstu.ru/api/v1/ruz/scheduler/26741", date: "2018-9-3")
+        sch.getLessonType(lesson: 1, day: 0, schedule: sch, completionHandler: { result in
+            self.display.text = result
+        })
+        
     }
-
+    
+    
 
 }
 
